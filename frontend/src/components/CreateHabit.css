@@ -1,0 +1,149 @@
+.habit-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.habit-modal {
+    background: var(--surface);
+    padding: 2rem;
+    border-radius: 12px;
+    width: 320px;
+    box-shadow: 0 8px 24px var(--shadow);
+    position: relative;
+    font-family: "Segoe UI", sans-serif;
+}
+
+.close-button {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: transparent;
+    border: none;
+    font-size: 24px;
+    color: #e53935;
+    cursor: pointer;
+}
+
+.habit-modal h3 {
+    margin-bottom: 1rem;
+    font-size: 20px;
+    color: var(--text-primary);
+}
+
+form label {
+    display: block;
+    margin-bottom: 1rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+}
+
+input,
+select {
+    width: 100%;
+    padding: 0.6rem;
+    margin-top: 0.4rem;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    font-size: 14px;
+    background: var(--surface);
+    color: var(--text-primary);
+    outline: none;
+    transition:
+        border-color 0.2s ease,
+        background-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+input::placeholder {
+    color: var(--text-subtle);
+}
+
+input:hover,
+select:hover {
+    border-color: var(--primary);
+}
+
+input:focus,
+select:focus {
+    border-color: var(--primary);
+    background: var(--surface);
+    box-shadow: 0 0 0 3px rgba(91, 124, 250, 0.12);
+}
+
+.create-button {
+    width: 100%;
+    padding: 0.8rem;
+    background-color: var(--primary);
+    color: #ffffff;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 1rem;
+    transition:
+        background-color 0.2s ease,
+        transform 0.15s ease;
+}
+
+.create-button:hover {
+    background-color: var(--primary-hover);
+    transform: translateY(-1px);
+}
+
+.error {
+    color: #d32f2f;
+    font-size: 13px;
+    margin-top: 0.5rem;
+}
+
+.habit-modal form {
+    margin-top: 1rem;
+}
+
+.habit-modal label {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+}
+
+.habit-modal input,
+.habit-modal select {
+    margin-top: 0.4rem;
+    padding: 0.6rem;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    font-size: 14px;
+    background: var(--surface);
+    color: var(--text-primary);
+    outline: none;
+    transition:
+        border-color 0.2s ease,
+        background-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.habit-modal input::placeholder {
+    color: var(--text-subtle);
+}
+
+.habit-modal input:hover,
+.habit-modal select:hover {
+    border-color: var(--primary);
+}
+
+.habit-modal input:focus,
+.habit-modal select:focus {
+    border-color: var(--primary);
+    background: var(--surface);
+    box-shadow: 0 0 0 3px rgba(91, 124, 250, 0.12);
+}

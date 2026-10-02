@@ -1,0 +1,220 @@
+/* =========================================
+   NAVBAR
+========================================= */
+
+.navbar {
+    width: 100%;
+    min-height: 64px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 28px;
+    background: var(--surface);
+    color: var(--text-primary);
+    border-bottom: 1px solid var(--border);
+    box-shadow: 0 2px 8px var(--shadow);
+    overflow: hidden;
+    transition:
+        background-color 0.25s ease,
+        color 0.25s ease,
+        border-color 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+/* =========================================
+   LEFT / BRAND
+========================================= */
+
+.nav-left {
+    min-width: 0;
+    flex-shrink: 0;
+}
+
+.nav-left h2 {
+    margin: 0;
+    font-size: 22px;
+    line-height: 1.1;
+    font-weight: 700;
+    color: var(--text-primary);
+    white-space: nowrap;
+    transition: color 0.25s ease;
+}
+
+/* =========================================
+   RIGHT / NAVIGATION
+========================================= */
+
+.nav-right {
+    min-width: 0;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.nav-right a {
+    color: var(--text-primary);
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    white-space: nowrap;
+    transition:
+        color 0.2s ease,
+        transform 0.15s ease;
+}
+
+.nav-right a:hover {
+    color: var(--primary);
+    transform: translateY(-1px);
+}
+
+/* =========================================
+   BUTTON BASE
+========================================= */
+
+.nav-right button {
+    margin: 0;
+    font-family: inherit;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+/* =========================================
+   LOGOUT
+========================================= */
+
+.nav-right button:not(.theme-toggle) {
+    padding: 7px 14px;
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    background: var(--surface-elevated);
+    color: var(--text-primary);
+    font-size: 13px;
+    font-weight: 600;
+    transition:
+        background-color 0.2s ease,
+        border-color 0.2s ease,
+        color 0.2s ease,
+        transform 0.15s ease;
+}
+
+.nav-right button:not(.theme-toggle):hover {
+    background: var(--primary-soft);
+    border-color: var(--primary);
+    color: var(--primary);
+    transform: translateY(-1px);
+}
+
+.nav-right button:not(.theme-toggle):active {
+    transform: translateY(0);
+}
+
+/* =========================================
+   THEME TOGGLE
+========================================= */
+
+.theme-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 12px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--surface-elevated);
+    color: var(--text-primary);
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition:
+        background-color 0.2s ease,
+        border-color 0.2s ease,
+        color 0.2s ease,
+        transform 0.15s ease;
+}
+
+.theme-toggle:hover {
+    background: var(--primary-soft);
+    border-color: var(--primary);
+    color: var(--primary);
+    transform: translateY(-1px);
+}
+
+.theme-toggle:active {
+    transform: translateY(0);
+}
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 700px) {
+    .navbar {
+        min-height: 58px;
+        padding: 9px 16px;
+    }
+
+    .nav-left h2 {
+        font-size: 18px;
+    }
+
+    .nav-right {
+        gap: 12px;
+    }
+
+    .nav-right a {
+        font-size: 12px;
+    }
+
+    .nav-right button:not(.theme-toggle) {
+        padding: 6px 11px;
+        font-size: 11px;
+    }
+
+    .theme-toggle {
+        padding: 6px 10px;
+        font-size: 11px;
+    }
+}
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 480px) {
+    .navbar {
+        min-height: 59px;
+        padding: 8px 12px;
+    }
+
+    .nav-left {
+        max-width: 92px;
+    }
+
+    .nav-left h2 {
+        font-size: 15px;
+        line-height: 1.05;
+        white-space: normal;
+    }
+
+    .nav-right {
+        gap: 8px;
+    }
+
+    .nav-right a {
+        font-size: 10px;
+        font-weight: 500;
+    }
+
+    .nav-right button:not(.theme-toggle) {
+        padding: 5px 10px;
+        border-radius: 4px;
+        font-size: 10px;
+        font-weight: 600;
+    }
+    .theme-toggle {
+        padding: 5px 8px;
+        border-radius: 4px;
+        font-size: 10px;
+        font-weight: 600;
+    }
+}

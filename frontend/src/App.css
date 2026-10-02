@@ -1,0 +1,81 @@
+:root {
+    --app-bg: #ffffff;
+    --surface: #ffffff;
+    --surface-elevated: #f9f9f9;
+    --text-primary: #111111;
+    --text-secondary: #333333;
+    --text-muted: #888888;
+    --text-subtle: #999999;
+    --border: #e7e7e7;
+    --border-soft: #eeeeee;
+    --primary: #2445b8;
+    --primary-hover: #1d3ca5;
+    --primary-soft: #eef3ff;
+    --success: #167a4a;
+    --success-soft: #e8f7ef;
+    --shadow: rgba(0, 0, 0, 0.05);
+}
+
+body.dark-theme {
+    --app-bg: #0f1117;
+    --surface: #171a21;
+    --surface-elevated: #1d212a;
+    --text-primary: #f3f4f6;
+    --text-secondary: #d1d5dc;
+    --text-muted: #a5adbb;
+    --text-subtle: #737c8c;
+    --border: #292f3a;
+    --border-soft: #242a34;
+    --primary: #5b7cfa;
+    --primary-hover: #6d8aff;
+    --primary-soft: #1b2545;
+    --success: #35b77f;
+    --success-soft: #18352b;
+    --shadow: rgba(0, 0, 0, 0.30);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+    width: 100%;
+    min-height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: "Segoe UI", sans-serif;
+    background: var(--app-bg);
+    color: var(--text-primary);
+    transition:
+        background-color 0.2s ease,
+        color 0.2s ease;
+}
+
+.main-container {
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    padding: 0;
+    font-family: "Segoe UI", sans-serif;
+}
+
+.auth-form {
+    background: var(--surface-elevated);
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 0 10px var(--shadow);
+}
+
+.chart-container {
+    width: 100%;
+    margin-top: 0;
+    background: var(--surface);
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 0 8px var(--shadow);
+}

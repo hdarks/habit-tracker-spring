@@ -1,0 +1,399 @@
+/* =========================================
+   DASHBOARD
+========================================= */
+
+.dashboard {
+    width: min(1400px, calc(100% - 48px));
+    margin: 0 auto;
+    min-height: calc(100vh - 80px);
+
+    box-sizing: border-box;
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(300px, 0.9fr)
+        minmax(500px, 1.2fr)
+        minmax(360px, 0.95fr);
+
+    grid-template-rows:
+        380px
+        320px
+        320px
+        420px;
+
+    grid-template-areas:
+        "welcome habits goals"
+        "highlights analytics goals"
+        "calendar analytics goals"
+        "calendar monthly monthly";
+
+    gap: 20px;
+    padding: 28px 0 40px;
+
+    background: var(--color-bg);
+
+    transition:
+        background-color 0.25s ease;
+}
+
+/* =========================================
+   WELCOME
+========================================= */
+
+.dashboard-welcome {
+    grid-area: welcome;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 24px 28px;
+    box-sizing: border-box;
+}
+
+.dashboard-welcome-content {
+    max-width: 320px;
+}
+
+.dashboard-greeting {
+    display: block;
+    font-size: 16px;
+    line-height: 1.4;
+    color: var(--text-secondary);
+}
+
+.dashboard-welcome h1 {
+    margin: 2px 0 14px;
+    font-size: 32px;
+    line-height: 1.15;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.dashboard-welcome p {
+    margin: 0;
+    max-width: 270px;
+    font-size: 15px;
+    line-height: 1.5;
+    color: var(--text-secondary);
+}
+
+/* =========================================
+   ACTIONS
+========================================= */
+
+.dashboard-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 24px;
+}
+
+.dashboard-actions button {
+    padding: 10px 16px;
+    border: 1px solid var(--border);
+    border-radius: 9px;
+    background: var(--surface);
+    color: var(--primary);
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        background-color 0.2s ease,
+        border-color 0.2s ease,
+        color 0.2s ease;
+}
+
+/* Create Habit */
+.dashboard-actions button:first-child {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: #ffffff;
+
+    box-shadow:
+        0 4px 12px rgba(36, 69, 184, 0.16);
+}
+
+/* Secondary button - Create Goal */
+.dashboard-actions button:last-child {
+    background: var(--surface);
+    border-color: var(--border);
+    color: var(--primary);
+}
+
+.dashboard-actions button:hover {
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 4px 12px var(--shadow);
+}
+
+/* Create Habit hover */
+.dashboard-actions button:first-child:hover {
+    background: var(--primary-hover);
+    border-color: var(--primary-hover);
+}
+
+/* Create Goal hover */
+.dashboard-actions button:last-child:hover {
+    background: var(--primary-soft);
+    border-color: var(--primary);
+    color: var(--primary);
+}
+
+/* =========================================
+   DARK MODE
+========================================= */
+
+body.dark-theme .dashboard-actions button:first-child {
+    box-shadow:
+        0 4px 12px rgba(91, 124, 250, 0.20);
+}
+
+body.dark-theme .dashboard-actions button:last-child {
+    background: var(--surface);
+    border-color: var(--border);
+    color: var(--primary);
+}
+
+body.dark-theme .dashboard-actions button:last-child:hover {
+    background: var(--primary-soft);
+    border-color: var(--primary);
+    color: var(--primary);
+}
+
+/* =========================================
+   SHARED DASHBOARD CARDS
+========================================= */
+
+.dashboard-card {
+    min-width: 0;
+    box-sizing: border-box;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    box-shadow: 0 4px 18px var(--shadow);
+    overflow: hidden;
+    transition:
+        background-color 0.25s ease,
+        border-color 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+/* =========================================
+   TODAY'S HABITS
+========================================= */
+
+.habits-card {
+    grid-area: habits;
+    min-height: 0;
+}
+
+.habits-card > * {
+    height: 100%;
+}
+
+
+/* =========================================
+   ANALYTICS
+========================================= */
+
+.analytics-card {
+    grid-area: analytics;
+    min-height: 0;
+}
+
+.analytics-card > * {
+    height: 100%;
+}
+
+
+/* =========================================
+   HIGHLIGHTS
+========================================= */
+
+.highlights-card {
+    grid-area: highlights;
+    min-height: 0;
+}
+
+.highlights-card > * {
+    height: 100%;
+}
+
+
+/* =========================================
+   CALENDAR
+========================================= */
+
+.calendar-card {
+    grid-area: calendar;
+    min-height: 0;
+}
+
+.calendar-card > * {
+    height: 100%;
+}
+
+
+/* =========================================
+   GOALS
+========================================= */
+
+.goals-card {
+    grid-area: goals;
+    min-height: 0;
+}
+
+.goals-card > * {
+    height: 100%;
+}
+
+
+/* =========================================
+   MONTHLY GRAPH
+========================================= */
+
+.graph-card {
+    grid-area: monthly;
+
+    min-height: 0;
+    padding: 0;
+}
+
+.graph-card > * {
+    height: 100%;
+}
+
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 1100px) {
+
+    .dashboard {
+        width: min(900px, calc(100% - 32px));
+
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto;
+
+        grid-template-areas:
+            "welcome welcome"
+            "highlights highlights"
+            "habits analytics"
+            "calendar goals"
+            "monthly monthly";
+    }
+
+    .dashboard-welcome {
+        padding: 20px 4px;
+    }
+
+    .dashboard-actions {
+        margin-top: 20px;
+    }
+
+    .highlights-card {
+        min-height: 280px;
+    }
+
+    .habits-card {
+        min-height: 390px;
+    }
+
+    .analytics-card {
+        min-height: 390px;
+    }
+
+    .calendar-card {
+        min-height: 500px;
+    }
+
+    .goals-card {
+        min-height: 600px;
+    }
+
+    .graph-card {
+        min-height: 360px;
+    }
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 700px) {
+
+    .dashboard {
+        width: calc(100% - 24px);
+
+        margin: 0 auto;
+
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+
+        grid-template-areas:
+            "welcome"
+            "highlights"
+            "habits"
+            "analytics"
+            "calendar"
+            "goals"
+            "monthly";
+
+        gap: 16px;
+
+        padding: 18px 0 30px;
+    }
+
+    .dashboard-welcome {
+        padding: 8px 4px;
+    }
+
+    .dashboard-welcome h1 {
+        font-size: 28px;
+    }
+
+    .dashboard-actions {
+        width: 100%;
+    }
+
+    .dashboard-actions button {
+        flex: 1;
+    }
+
+    .highlights-card,
+    .habits-card,
+    .analytics-card,
+    .calendar-card,
+    .goals-card,
+    .graph-card {
+        min-height: 0;
+    }
+
+    .highlights-card {
+        min-height: 280px;
+    }
+
+    .habits-card {
+        min-height: 390px;
+    }
+
+    .analytics-card {
+        min-height: 390px;
+    }
+
+    .calendar-card {
+        min-height: 500px;
+    }
+
+    .goals-card {
+        min-height: 500px;
+    }
+
+    .graph-card {
+        min-height: 360px;
+    }
+}

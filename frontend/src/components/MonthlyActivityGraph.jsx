@@ -70,17 +70,6 @@ export default function MonthlyActivityGraph({ refresh }) {
         );
     };
 
-
-    const isSameMonth = (dateA, dateB) => {
-        return (
-            dateA.getFullYear() ===
-                dateB.getFullYear() &&
-            dateA.getMonth() ===
-                dateB.getMonth()
-        );
-    };
-
-
     /*
      * -----------------------------------------
      * CURRENT MONTH
@@ -95,15 +84,13 @@ export default function MonthlyActivityGraph({ refresh }) {
         1
     );
 
-
     /*
      * -----------------------------------------
      * REGISTRATION MONTH
      * -----------------------------------------
      */
 
-    const registrationDate =
-        getRegistrationDate();
+    const registrationDate = getRegistrationDate();
 
     const registrationMonth = registrationDate
         ? (() => {
@@ -177,49 +164,24 @@ export default function MonthlyActivityGraph({ refresh }) {
         const fetchMonthlyActivity = async () => {
             try {
                 setLoading(true);
-
-                const year =
-                    selectedMonth.getFullYear();
-
-                const month =
-                    selectedMonth.getMonth();
-
-                const habitRes =
-                    await api.get("/habits");
-
-                const habits = Array.isArray(
-                    habitRes.data
-                )
-                    ? habitRes.data
-                    : [];
+                const year = selectedMonth.getFullYear();
+                const month = selectedMonth.getMonth();
+                const habitRes = await api.get("/habits");
+                const habits = Array.isArray(habitRes.data) ? habitRes.data : [];
 
                 setTotalHabits(habits.length);
-
                 if (habits.length === 0) {
                     setData([]);
                     return;
                 }
-
-
                 /*
                  * -----------------------------------------
                  * FETCH LOGS
                  * -----------------------------------------
                  */
 
-                const logResponses =
-                    await Promise.all(
-                        habits.map((habit) =>
-                            api.get(
-                                `/habits/${habit.id}/logs`
-                            )
-                        )
-                    );
-
-
+                const logResponses = await Promise.all(habits.map((habit) => api.get(`/habits/${habit.id}/logs`)));
                 const dailyMap = {};
-
-
                 /*
                  * -----------------------------------------
                  * BUILD MONTH DATA
@@ -228,127 +190,62 @@ export default function MonthlyActivityGraph({ refresh }) {
 
                 logResponses.forEach(
                     (response) => {
-                        const logs =
-                            Array.isArray(
-                                response.data
-                            )
-                                ? response.data
-                                : [];
-
+                        const logs = Array.isArray(response.data) ? response.data : [];
                         logs.forEach((log) => {
-                            if (
-                                !log.logDate ||
-                                !log.completed
-                            ) {
+                            if (!log.logDate || !log.completed) {
                                 return;
                             }
 
-                            const dateKey =
-                                log.logDate.slice(
-                                    0,
-                                    10
-                                );
-
-                            const [
-                                logYear,
-                                logMonth
-                            ] = dateKey
-                                .split("-")
-                                .map(Number);
-
+                            const dateKey = log.logDate.slice(0, 10);
+                            const [logYear, logMonth] = dateKey.split("-").map(Number);
 
                             /*
                              * Only logs belonging to
                              * the selected month.
                              */
 
-                            if (
-                                logYear !== year ||
-                                logMonth !== month + 1
-                            ) {
+                            if (logYear !== year || logMonth !== month + 1) {
                                 return;
                             }
-
-
                             /*
                              * Never show activity from
                              * before registration.
                              */
 
-                            if (
-                                registrationDate &&
-                                dateKey <
-                                    registrationDate
-                            ) {
+                            if (registrationDate && dateKey < registrationDate) {
                                 return;
                             }
 
-
-                            if (
-                                !dailyMap[dateKey]
-                            ) {
+                            if (!dailyMap[dateKey]) {
                                 dailyMap[dateKey] = 0;
                             }
-
                             dailyMap[dateKey]++;
                         })
                     }
                 );
-
-
                 /*
                  * -----------------------------------------
                  * CREATE EVERY DAY OF SELECTED MONTH
                  * -----------------------------------------
                  */
 
-                const daysInMonth =
-                    new Date(
-                        year,
-                        month + 1,
-                        0
-                    ).getDate();
-
+                const daysInMonth = new Date(year, month + 1, 0).getDate();
                 const formatted = [];
-
-                for (
-                    let day = 1;
-                    day <= daysInMonth;
-                    day++
-                ) {
-                    const dateKey =
-                        `${year}-${String(
-                            month + 1
-                        ).padStart(2, "0")}-${String(
-                            day
-                        ).padStart(2, "0")}`;
-
-                    const beforeRegistration =
-                        registrationDate &&
-                        dateKey < registrationDate;
+                for (let day = 1; day <= daysInMonth; day++) {
+                    const dateKey = `${year}-${String(month + 1).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
+                    const beforeRegistration = registrationDate && dateKey < registrationDate;
 
                     formatted.push({
                         date: dateKey,
-
-                        completedCount:
-                            beforeRegistration
-                                ? null
-                                : dailyMap[
-                                      dateKey
-                                  ] || 0
+                        completedCount:beforeRegistration
+                            ? null
+                            : dailyMap[dateKey] || 0
                     });
                 }
-
                 setData(formatted);
-
             } catch (err) {
-                console.error(
-                    "Error fetching monthly activity",
-                    err
-                );
-
+                console.error("Error fetching monthly activity", err);
                 setData([]);
-
             } finally {
                 setLoading(false);
             }
@@ -357,6 +254,7 @@ export default function MonthlyActivityGraph({ refresh }) {
         fetchMonthlyActivity();
     }, [
         selectedMonth,
+        registrationDate,
         refresh
     ]);
 

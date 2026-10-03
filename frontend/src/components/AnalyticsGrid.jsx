@@ -199,7 +199,7 @@ export default function AnalyticsGrid({ refresh }) {
 
     useEffect(() => {
         fetchAnalytics();
-    }, [refresh]);
+    }, [fetchAnalytics]);
 
 
     return (

@@ -127,7 +127,7 @@ const loadHabits = async () => {
 
 useEffect(() => {
     loadHabits();
-}, [refresh]);
+}, [loadHabits]);
 
 useEffect(() => {
     if (!selectedWeeklyHabit) {
@@ -173,7 +173,7 @@ const toggleHabit = async (habitId, completed, todayLogId) => {
         } else {
             if (todayLogId) {
                 await api.put(`/habit-logs/${todayLogId}`, {
-                    logDate: habits.find((item) => item.id === habitId) ?.todayLogId ? undefined : today,
+                    logDate: habits.find((item) => item.id === habitId)?.todayLogId ? undefined : today,
                     completed
                 });
             } else {

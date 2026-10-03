@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import "./HabitLogging.css";
 import api from "../api";
 
@@ -9,20 +9,20 @@ const [selectedWeeklyHabit, setSelectedWeeklyHabit] = useState(null);
 
 const habitListRef = useRef(null);
 
-const getTodayDate = () => {
+const getTodayDate = useCallback(() => {
     const today = new Date();
     const year = today.getFullYear();
     const month = String(today.getMonth() + 1).padStart(2, "0");
     const day = String(today.getDate()).padStart(2, "0");
     return `${year}-${month}-${day}`;
-};
+}, []);
 
-const parseDate = (dateString) => {
+const parseDate = useCallback((dateString) => {
     const [year, month, day] = dateString.split("-").map(Number);
     return new Date(year, month - 1, day);
-};
+}, []);
 
-const getStartOfWeek = (date) => {
+const getStartOfWeek = useCallback((date) => {
     const result = new Date(date);
     const day = result.getDay();
     const daysFromMonday = (day + 6) % 7;
@@ -30,17 +30,17 @@ const getStartOfWeek = (date) => {
     result.setDate(result.getDate() - daysFromMonday);
     result.setHours(0, 0, 0, 0);
     return result;
-};
+}, []);
 
-const getEndOfWeek = (date) => {
+const getEndOfWeek = useCallback((date) => {
     const result = getStartOfWeek(date);
     result.setDate(result.getDate() + 6);
     result.setHours(23, 59, 59, 999);
 
     return result;
-};
+}, [getStartOfWeek]);
 
-const isDateInCurrentWeek = (dateString) => {
+const isDateInCurrentWeek = useCallback((dateString) => {
     if (!dateString) {
         return false;
     }
@@ -51,7 +51,7 @@ const isDateInCurrentWeek = (dateString) => {
     const weekEnd = getEndOfWeek(today);
 
     return (date >= weekStart && date <= weekEnd);
-};
+}, [parseDate, getStartOfWeek, getEndOfWeek]);
 
 const formatDisplayDate = (dateString) => {
     if (!dateString) {
@@ -86,7 +86,7 @@ const getWeekRangeLabel = () => {
     return `${startLabel} – ${endLabel}`;
 };
 
-const loadHabits = async () => {
+const loadHabits = useCallback(async () => {
     try {
         setError("");
 
@@ -123,7 +123,7 @@ const loadHabits = async () => {
         console.error("Failed to fetch Habits", err);
         setError("Failed to fetch Habits");
     }
-};
+}, [getTodayDate, isDateInCurrentWeek]);
 
 useEffect(() => {
     loadHabits();

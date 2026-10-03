@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import api from "../api";
 import "./AnalyticsGrid.css";
 
@@ -19,7 +19,7 @@ export default function AnalyticsGrid({ refresh }) {
         return `${year}-${month}-${day}`;
     };
 
-    const fetchAnalytics = async () => {
+    const fetchAnalytics = useCallback(async () => {
         try {
             const habitResponse = await api.get("/habits");
 
@@ -195,7 +195,7 @@ export default function AnalyticsGrid({ refresh }) {
             setCompletionRate(0);
             setTotalHabits(0);
         }
-    };
+    }, []);
 
     useEffect(() => {
         fetchAnalytics();

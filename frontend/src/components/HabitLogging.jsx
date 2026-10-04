@@ -127,7 +127,7 @@ const loadHabits = useCallback(async () => {
 
 useEffect(() => {
     loadHabits();
-}, [loadHabits]);
+}, [loadHabits, refresh]);
 
 useEffect(() => {
     if (!selectedWeeklyHabit) {
